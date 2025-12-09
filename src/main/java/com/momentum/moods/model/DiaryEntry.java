@@ -3,8 +3,6 @@ package com.momentum.moods.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-
 @Document(collection = "diary_entries")
 public class DiaryEntry {
 
@@ -14,11 +12,11 @@ public class DiaryEntry {
     private String userId;
     private String title;
     private String content;
-    private LocalDate date;
+    private String date;  // YYYY-MM-DD format
 
     public DiaryEntry() {}
 
-    public DiaryEntry(String userId, String title, String content, LocalDate date) {
+    public DiaryEntry(String userId, String title, String content, String date) {
         this.userId = userId;
         this.title = title;
         this.content = content;
@@ -39,6 +37,6 @@ public class DiaryEntry {
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
 }

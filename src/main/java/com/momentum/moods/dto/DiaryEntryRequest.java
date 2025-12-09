@@ -1,13 +1,11 @@
 package com.momentum.moods.dto;
 
-import java.time.LocalDate;
-
 public class DiaryEntryRequest {
 
     private String userId;
     private String title;
     private String content;
-    private LocalDate date;
+    private String date;  // YYYY-MM-DD format (optional)
 
     public DiaryEntryRequest() {}
 
@@ -22,6 +20,6 @@ public class DiaryEntryRequest {
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
 
-    public LocalDate getDate() { return date; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
 }
