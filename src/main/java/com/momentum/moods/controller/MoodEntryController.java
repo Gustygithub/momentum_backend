@@ -40,4 +40,30 @@ public class MoodEntryController {
         List<MoodEntry> moods = repository.findByUserIdOrderByDateDesc(userId);
         return ResponseEntity.ok(moods);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MoodEntry> updateMood(@PathVariable String id, @RequestBody MoodEntryRequest request) {
+        return repository.findById(id)
+                .map(existingEntry -> {
+                    existingEntry.setUserId(request.getUserId());
+                    existingEntry.setEmotion(request.getEmotion());
+                    existingEntry.setNote(request.getNote());
+                    if (request.getDate() != null) {
+                        existingEntry.setDate(request.getDate());
+                    }
+                    MoodEntry updated = repository.save(existingEntry);
+                    return ResponseEntity.ok(updated);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMood(@PathVariable String id) {
+        return repository.findById(id)
+                .map(entry -> {
+                    repository.delete(entry);
+                    return ResponseEntity.ok().<Void>build();
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
